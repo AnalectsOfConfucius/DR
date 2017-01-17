@@ -3,88 +3,31 @@ $(function () {
     $('.search-action').click(function () {
         initQuery(0, 10);
     });
-    $('.add-action').click(function () {
-        add();
+    $('.add-modal').bind('click', function() {
+        $.ajax({
+            url: window.apiPoint + 'lawenforce-departments',
+            type: 'GET',
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    var result= {};
+                    result["departments"] = data;
+                    var tpl = [
+                        '<option></option>',
+                        '{@each departments as it,index}',
+                        '<option value="${it.id}">${it.departmentName}</option>',
+                        '{@/each}'].join('');
+                    var html = juicer(tpl, result);
+                    $('#addOptionFirst').html(html);
+                }
+            },
+        });
+    });
+    $('.add-action').bind('click', function () {
+        addOne();
     });
 });
-
-function add() {
-    var addUrl = window.apiPoint + 'managers';
-    var managerId = $("#add").find("input[name=managerId]").val();
-    var managerCardId = $("#add").find("input[name=managerCardId]").val();
-    var managerName = $("#add").find("input[name=managerName]").val();
-    var managerCardType = $("#add").find("select[name=managerCardType]").val();
-    var managerSex = $("#add").find("select[name=managerSex]").val();
-    var description = $("#add").find("textarea[name=description]").val();
-    var managerLawenforceDepartmentId = $("#add").find("select[name=managerLawenforceDepartmentId]").val();
-    var managerLawenforceDepartment = {id: managerLawenforceDepartmentId};
-    var dataPost = {
-        managerId: managerId,
-        managerCardId: managerCardId,
-        managerName: managerName,
-        managerCardType: managerCardType,
-        managerSex: managerSex,
-        description: description,
-        managerLawenforceDepartment: managerLawenforceDepartment
-    };
-    console.log(dataPost);
-    $.ajax({
-        url: addUrl,
-        type: 'POST',
-        // 序列化Json对象为Json字符串
-        data: JSON.stringify(dataPost),
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                initPage(0, 10);
-                $('#myModal0').modal('hide');
-                $('input[name=reset]').trigger("click");
-            }
-        },
-    });
-};
-
-function addOne() {
-    $.ajax({
-        url: window.apiPoint + 'lawenforce-departments',
-        type: 'GET',
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                console.log(data);
-                data["departments"] = data;
-                var tpl = [
-                    '<option></option>',
-                    '{@each departments as it,index}',
-                    '<option value="${it.id}">${it.departmentName}</option>',
-                    '{@/each}'].join('');
-                var html = juicer(tpl, data);
-                $('#addOptionFirst').html(html);
-            }
-        },
-    });
-    $.ajax({
-        url: window.apiPoint + 'lawenforce-areas',
-        type: 'GET',
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                console.log(data);
-                data["areas"] = data;
-                var tpl = [
-                    '<option></option>',
-                    '{@each areas as it,index}',
-                    '<option value="${it.id}">${it.areaName}</option>',
-                    '{@/each}'].join('');
-                var html = juicer(tpl, data);
-                $('#addOptionSecond').html(html);
-            }
-        },
-    });
-};
 
 function initQuery(page, size) {
     var query = $('#query').val();
@@ -136,15 +79,17 @@ function initQuery(page, size) {
     });
 };
 
+function pageQuery(page_index) {
+    initQuery(page_index, 10);
+};
+
 function initPage(page, size) {
-    var url = window.apiPoint + 'managers';
-    console.log(url);
     var dataQuery = {
         page: page,
         size: size
     };
     $.ajax({
-        url: url,
+        url: window.apiPoint + 'managers',
         type: 'GET',
         // GET请求传递data
         data: dataQuery,
@@ -160,18 +105,17 @@ function initPage(page, size) {
                 var tpl = [
                     '{@each managers as it,index}',
                     '<tr>',
-                    '<td>${it.managerCardId}</td>',
-                    '<td>${it.managerCardType}</td>',
+                    '<td>{@if it.managerHNCard != null }${it.managerHNCard}{@/if}</td>',
+                    '<td>${it.managerICCard}</td>',
                     '<td>${it.managerName}</td>',
                     '<td>${it.managerSex}</td>',
                     '<td>{@if it.managerLawenforceDepartment != null }${it.managerLawenforceDepartment.departmentName}{@/if}</td>',
-                    '<td>{@if it.managerLawenforceAreas != null }${it.managerLawenforceAreas.areaName}{@/if}</td>',
-                    '<td>{@if it.managerFlag != null }${it.managerFlag}{@/if}</td>',
+                    '<td>{@if it.managerFlag == null }{@else if it.managerFlag == 1 }黑名单{@else}白名单{@/if}</td>',
                     '<td>{@if it.checkCount != null }${it.checkCount}{@/if}</td>',
                     '<td>{@if it.description != null }${it.description}{@/if}</td>',
                     '<td>',
-                    '<a href="javascript:;" data-toggle="modal" data-target="#myModal1">查看</a>',
-                    '<a href="javascript:;" data-toggle="modal" data-target="#myModal2">修改</a>',
+                    '<a href="javascript:;" onclick="detailOne(${it.id})" data-toggle="modal" data-target="#myModal1">查看</a>',
+                    '<a href="javascript:;" onclick="updateOne(${it.id})" data-toggle="modal" data-target="#myModal2">修改</a>',
                     '<a href="javascript:;" onclick="deleteOne(${it.id})">删除</a>',
                     '</td>',
                     '</tr>',
@@ -187,13 +131,47 @@ function initPage(page, size) {
     });
 };
 
-function pageQuery(page_index) {
-    initQuery(page_index, 10);
-};
-
 function pageSelect(page_index) {
     initPage(page_index, 10);
 };
+
+function addOne() {
+    var managerName = $("#add").find("input[name=managerName]").val();
+    var managerHNCard = $("#add").find("input[name=managerHNCard]").val();
+    var managerICCard = $("#add").find("input[name=managerICCard]").val();
+    var managerPhone = $("#add").find("input[name=managerPhone]").val();
+    var managerSex = $("#add").find("select[name=managerSex]").val();
+    var managerFlag = $("#add").find("select[name=managerFlag]").val();
+    var description = $("#add").find("textarea[name=description]").val();
+    var managerLawenforceDepartmentId = $("#add").find("select[name=managerLawenforceDepartmentId]").val();
+    var managerLawenforceDepartment = {id: managerLawenforceDepartmentId};
+    var dataPost = {
+        managerName: managerName,
+        managerHNCard: managerHNCard,
+        managerICCard: managerICCard,
+        managerSex: managerSex,
+        managerFlag: managerFlag,
+        managerPhone: managerPhone,
+        description: description,
+        managerLawenforceDepartment: managerLawenforceDepartment
+    };
+    console.log(dataPost);
+    $.ajax({
+        url: window.apiPoint + 'managers',
+        type: 'POST',
+        // 序列化Json对象为Json字符串
+        data: JSON.stringify(dataPost),
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                initPage(0, 10);
+                $('#myModal0').modal('hide');
+                $('input[name=reset]').trigger("click");
+            }
+        },
+    });
+}
 
 function deleteOne(id) {
     swal({
@@ -226,4 +204,67 @@ function deleteOne(id) {
                 swal("已取消", "您取消了删除操作！", "error");
             }
         });
+};
+
+function detailOne(id) {
+    $.ajax({
+        url: window.apiPoint + 'managers/' + id,
+        type: 'GET',
+        async: true,
+        dataType: 'json',
+        success: function (data, status, xhr) {
+            if (data) {
+                console.log(data);
+                $("#detail").find("input[name=managerName]").val(data.managerName);
+                $("#detail").find("input[name=managerHNCard]").val(data.managerHNCard);
+                $("#detail").find("input[name=managerICCard]").val(data.managerICCard);
+                $("#detail").find("input[name=managerPhone]").val(data.managerPhone);
+                $("#detail").find("select[name=managerSex]").val(data.managerSex);
+                $("#detail").find("select[name=managerFlag]").val(data.managerFlag);
+                $("#detail").find("textarea[name=description]").val(data.description);
+                $("#detail").find("input[name=managerLawenforceDepartmentId]").val(data.managerLawenforceDepartment.departmentName);
+            }
+        },
+    });
+};
+
+function updateOne(id) {
+    $.ajax({
+        url: window.apiPoint + 'lawenforce-departments',
+        type: 'GET',
+        async: false,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                var result= {};
+                result["departments"] = data;
+                var tpl = [
+                    '<option></option>',
+                    '{@each departments as it,index}',
+                    '<option value="${it.id}">${it.departmentName}</option>',
+                    '{@/each}'].join('');
+                var html = juicer(tpl, result);
+                $('#updateOptionFirst').html(html);
+            }
+        },
+    });
+    $.ajax({
+        url: window.apiPoint + 'managers/' + id,
+        type: 'GET',
+        async: true,
+        dataType: 'json',
+        success: function (data, status, xhr) {
+            if (data) {
+                console.log(data);
+                $("#update").find("input[name=managerName]").val(data.managerName);
+                $("#update").find("input[name=managerHNCard]").val(data.managerHNCard);
+                $("#update").find("input[name=managerICCard]").val(data.managerICCard);
+                $("#update").find("input[name=managerPhone]").val(data.managerPhone);
+                $("#update").find("select[name=managerSex]").val(data.managerSex);
+                $("#update").find("select[name=managerFlag]").val(data.managerFlag);
+                $("#update").find("textarea[name=description]").val(data.description);
+                $("#update").find("select[name=managerLawenforceDepartmentId]").val(data.managerLawenforceDepartment.id);
+            }
+        },
+    });
 };
