@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <style>
+        .ibox-content table tr th,
+        .ibox-content table tr td {
+            text-align: center;
+            font-size: 14px;
+            height: 27px;
+            line-height: 27px;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td:last-child {
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .ibox-content table tr td a {
+            padding: 0 5px;
+        }
+
+        .titleCon a i {
+            position: relative;
+            font-size: 25px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="form-horizontal text-center" style="font-size: 20px;">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">企业随机号</label>
+                    <div class="col-sm-8">
+                        <input id="business" style="text-align:center; font-weight: bold; font-size: 25px; color: red;"
+                               type="email"
+                               value="123113******213121" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">人员随机号</label>
+                    <div class="col-sm-8">
+                        <input id="people" style="text-align:center; font-weight: bold; font-size: 25px; color: red;"
+                               type="text"
+                               value="123113******213121" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <button class="btn btn-primary finish-action" type="submit" disabled="true">完成抽选</button>
+                        <input type="text" id="doubleRandomId" hidden>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/content.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script>
+    function autoScroll() {
+        $('#business').val(Math.floor(Math.random() * 100000) + "******" + Math.floor(Math.random() * 100000));
+        $('#people').val(Math.floor(Math.random() * 100000) + "******" + Math.floor(Math.random() * 100000));
+    }
+    $(function () {
+        var interval = setInterval('autoScroll()', 1);
+        var doubleRandomName = localStorage.getItem("doubleRandomName");
+        var doubleRandomNotary = localStorage.getItem("doubleRandomNotary");
+        var doubleRandomDate = localStorage.getItem("doubleRandomDate");
+        var tasks = localStorage.getItem("tasks");
+        var doubleRandomCompanyName = localStorage.getItem("doubleRandomCompanyName");
+        var companyDescription = localStorage.getItem("companyDescription");
+        var doubleRandomCompanyType = localStorage.getItem("doubleRandomCompanyType");
+        var doubleRandomCompanySupervisory = localStorage.getItem("doubleRandomCompanySupervisory");
+        var doubleRandomCompanyIndustryType = localStorage.getItem("doubleRandomCompanyIndustryType");
+        var doubleRandomCompanyRatio = localStorage.getItem("doubleRandomCompanyRatio");
+        var doubleRandomManagerName = localStorage.getItem("doubleRandomManagerName");
+        var managerDescription = localStorage.getItem("managerDescription");
+        var doubleRandomManagerDepartment = localStorage.getItem("doubleRandomManagerDepartment");
+        var doubleRandomManagerRatio = localStorage.getItem("doubleRandomManagerRatio");
+        var description = companyDescription + "||" + managerDescription;
+        console.log(doubleRandomManagerDepartment);
+        tasks = tasks.replace(/,/, "|");
+        var dataPost = {
+            doubleRandomName: doubleRandomName,
+            doubleRandomNotary: doubleRandomNotary,
+            doubleRandomDate: doubleRandomDate,
+            doubleRandomCompanyName: doubleRandomCompanyName,
+            doubleRandomCompanyType: doubleRandomCompanyType,
+            doubleRandomCompanySupervisory: doubleRandomCompanySupervisory,
+            doubleRandomCompanyIndustryType: doubleRandomCompanyIndustryType,
+            doubleRandomCompanyRatio: doubleRandomCompanyRatio,
+            doubleRandomManagerName: doubleRandomManagerName,
+            doubleRandomManagerDepartment: doubleRandomManagerDepartment,
+            doubleRandomManagerRatio: doubleRandomManagerRatio,
+            description: description,
+            doubleRandomManagerNumber: 2,
+            tasksString: tasks
+        };
+        $.ajax({
+            url: window.apiPoint + 'double-randoms/start',
+            type: 'POST',
+            async: true,
+            data: JSON.stringify(dataPost),
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    $('#doubleRandomId').val(data.id);
+                    clearInterval(interval);
+                    $('#business').val("公司抽选已完成");
+                    $('#people').val("人员抽选已完成");
+                    $('.finish-action').attr('disabled', false);
+                }
+            },
+        });
+    })
+    $('.finish-action').click(function () {
+        var doubleRandomId = $('#doubleRandomId').val();
+        parent.location.href = "/app/doublerandom/start/fourth.html?id=" + doubleRandomId;
+    });
+</script>
+</body>
+</html>

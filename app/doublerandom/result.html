@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css" rel="stylesheet">
+    <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/assets/css/pagination.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/plugins/chosen/chosen.min.css" rel="stylesheet">
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <style>
+        .wilq a {
+            font-size: 15px;
+            padding-right: 5px;
+        }
+
+        .h5Class {
+            padding: 0;
+            margin: 0;
+            height: 50px;
+            line-height: 50px;
+            text-indent: 20px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-worppar {
+            max-width: 1200px;
+            background: #fff;
+            border-radius: 5px;
+            margin: 30px auto;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td {
+            text-align: center;
+            font-size: 14px;
+            height: 27px;
+            line-height: 27px;
+        }
+
+        .ibox-content table tr td a {
+            padding: 0 5px;
+        }
+
+        .titleCon a i {
+            position: relative;
+            font-size: 25px;
+            color: #000;
+        }
+
+        .ibox-title {
+            margin-top: 10px;
+            border-width: 1px 0 0;
+        }
+
+        .theme-poptit .close {
+            float: right;
+            color: #999;
+            padding: 5px;
+            margin: -2px -5px -5px;
+            font: bold 14px/14px simsun;
+            text-shadow: 0 1px 0 #ddd;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInRight">
+    <div class="col-sm-4">
+        <h2>双随机结果列表</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>双随机结果</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>任务名称</th>
+                            <th>企业名称</th>
+                            <th>执法人员名称</th>
+                            <th>检查日期</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tContent">
+                        </tbody>
+                    </table>
+                    <!--分页 S-->
+                    <div class="pages clearfix">
+                        <div id="Pagination"></div>
+                    </div>
+                    <!--分页 E-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改 S-->
+<div class="modal fade" id="myModal0" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">修改双随机抽查结果</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">方案名称：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" value="${name}" class="form-control" required
+                                       aria-required="true" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">公证人：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment" name="comment" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2 pb20">
+                                <a class="btn btn-primary import-action" type="submit">保存</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改 E-->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/assets/js/jquery.pagination.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/chosen/chosen.jquery.min.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/doublerandom/result.controller.js"></script>
+</body>
+</html>

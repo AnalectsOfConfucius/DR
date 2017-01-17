@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/assets/css/pagination.css" rel="stylesheet">
+    <link href="/assets/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="/assets/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <style>
+        .ibox-content table tr th,
+        .ibox-content table tr td {
+            text-align: center;
+            font-size: 14px;
+            height: 27px;
+            line-height: 27px;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td:last-child {
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .ibox-content table tr td a {
+            padding: 0 5px;
+        }
+
+        .titleCon a i {
+            position: relative;
+            font-size: 25px;
+            color: #000;
+        }
+
+        .ibox-title {
+            margin-top: 10px;
+            border-width: 1px 0 0;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInRight">
+    <div class="col-sm-4">
+        <h2>双随机抽选</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="first.html">创立抽选方案</a>
+            </li>
+            <li>
+                <strong>筛选抽查企业</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="javascript:;" onclick="javascript:history.back(-1);" class="btn btn-primary">返回</a>
+            <a href="javascript:;" type="submit" class="btn btn-primary search-action">筛选</a>
+            <a href="third.html" class="btn btn-primary second-action" style="display: none;">下一步</a>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h4>抽查企业筛选条件</h4>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="second" novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-4 control-label">企业名称：</label>
+                                        <div class="col-sm-8">
+                                            <input name="doubleRandomCompanyName" minlength="1" type="text"
+                                                   class="form-control" required
+                                                   aria-required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-4 control-label">行业类型：</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control m-b" id="industryTypes" name="doubleRandomCompanyIndustryType">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-4 control-label">企业类型：</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control m-b" id="companyTypes" name="doubleRandomCompanyType">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-4 control-label">监管机关：</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control m-b" id="lawenforceDepartments" name="doubleRandomCompanySupervisory">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-4 control-label">抽选率：</label>
+                                        <div class="col-sm-8">
+                                            <input id="ionrange" name="doubleRandomCompanyRatio" minlength="1"/>
+                                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>请选择抽选覆盖率</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <h4>企业筛选结果</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>注册号</th>
+                            <th>企业名称</th>
+                            <th>经营地址</th>
+                            <th>法人代表</th>
+                            <th>联系电话</th>
+                            <th>属地监管机关</th>
+                            <th>稽查状态</th>
+                            <th>说明</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tContent">
+                        </tbody>
+                    </table>
+                    <!--分页 S-->
+                    <div class="pages clearfix">
+                        <div id="Pagination"></div>
+                    </div>
+                    <!--分页 E-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/jquery.pagination.js"></script>
+<script src="/assets/js/content.js?v=1.0.0"></script>
+<script src="/assets/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/demo/form-validate-demo.js"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/doublerandom/start/doublerandom.controller.js"></script>
+<script src="/app/doublerandom/start/second.controller.js"></script>
+</body>
+</html>

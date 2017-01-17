@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/plugins/chosen/chosen.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInRight">
+    <div class="col-sm-4">
+        <h2>双随机抽选</h2>
+        <ol class="breadcrumb">
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="javascript:;" class="btn btn-primary first-action">下一步</a>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h4>创立抽选方案</h4>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="first" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">公证人：</label>
+                            <div class="col-sm-6">
+                                <input minlength="2" type="text" name="doubleRandomNotary"
+                                       class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">检查日期：</label>
+                            <div class="col-sm-6">
+                                <input class="form-control layer-date" name="doubleRandomDate" placeholder="YYYY-MM-DD" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+                                <label class="laydate-icon"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">任务清单：</label>
+                            <div class="col-sm-6">
+                                <select name="tasks" data-placeholder="请选择检查项目" style="width:450px;" class="chosen-select" multiple
+                                        tabindex="6" id="tContent">
+                                    <option value=""></option>
+                                    <optgroup label="直销违法行为的检查">
+                                        <option value="1">重大变更的检查</option>
+                                        <option value="2">超出直销产品范围从事直销经营活动的检查</option>
+                                        <option>宣传和推销行为的检查</option>
+                                        <option>直销员招募的检查</option>
+                                        <option>直销员业务培训的检查</option>
+                                        <option>直销员报酬支付的检查</option>
+                                        <option>换货、退货的检查</option>
+                                        <option>信息报备和披露的检查 </option>
+                                        <option>保证金规定遵守情况的检查</option>
+                                    </optgroup>
+                                    <optgroup label="流通领域商品质量检查">
+                                        <option>销售淘汰产品的检查</option>
+                                        <option>销售失效、变质产品的检查</option>
+                                        <option>不符合产品包装、标识要求的检查</option>
+                                        <option>服务业经营者违法行为的检查</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
+<script src="/assets/js/demo/form-validate-demo.js"></script>
+<script src="/assets/js/plugins/chosen/chosen.jquery.min.js"></script>
+<script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/assets/js/plugins/layer/laydate/laydate.js"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/doublerandom/start/doublerandom.controller.js"></script>
+<script src="/app/doublerandom/start/first.controller.js"></script>
+</body>
+</html>

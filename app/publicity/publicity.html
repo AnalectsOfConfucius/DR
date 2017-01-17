@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table td {
+            border: 1px solid #FFFFFF;
+        }
+
+        table th {
+            border: 1px solid #FFFFFF;
+
+        }
+
+        body {
+            background: black;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            color: white;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .title {
+            line-height: 10px;
+            font-weight: bold;
+            font-size: 50px;
+        }
+
+        .title .small {
+            line-height: 10px;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .title span {
+            color: yellow;
+            font-size: 35px;
+        }
+
+        .thread {
+            margin: auto;
+        }
+
+        .thread th {
+            width: 350px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:first-child {
+            width: 50px;
+            max-width: 50px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:nth-child(3) {
+            width: 400px;
+            max-width: 400px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:nth-child(4) {
+            width: 250px;
+            max-width: 300px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:last-child {
+            width: 100px;
+            max-width: 100px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:nth-last-child(2) {
+            width: 100px;
+            max-width: 100px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:nth-last-child(3) {
+            width: 100px;
+            max-width: 100px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:nth-last-child(4) {
+            width: 250px;
+            max-width: 250px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .thread th:nth-last-child(5) {
+            width: 400px;
+            max-width: 400px;
+            font-size: 20px;
+            color: yellow;
+        }
+
+        .tbody {
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .tbody td {
+            width: 350px;
+            max-width: 350px;
+            height: 30px;
+            font-size: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .tbody td:first-child {
+            width: 50px;
+            max-width: 50px;
+            font-weight: bold;
+        }
+
+        .tbody td:nth-child(3) {
+            width: 400px;
+            max-width: 400px;
+            font-weight: bold;
+        }
+
+        .tbody td:nth-child(4) {
+            width: 250px;
+            max-width: 250px;
+            font-weight: bold;
+        }
+
+        .tbody td:last-child {
+            width: 100px;
+            max-width: 100px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .tbody td:nth-last-child(2) {
+            width: 100px;
+            max-width: 100px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .tbody td:nth-last-child(3) {
+            width: 100px;
+            max-width: 100px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .tbody td:nth-last-child(4) {
+            width: 250px;
+            max-width: 250px;
+        }
+
+        .tbody td:nth-last-child(5) {
+            width: 400px;
+            max-width: 400px;
+        }
+
+        :-webkit-full-screen {
+            background: black;
+        }
+
+        :-moz-full-screen {
+            background: black;
+        }
+
+        :-ms-fullscreen {
+            background: black;
+        }
+
+        :fullscreen {
+            background: black;
+        }
+    </style>
+</head>
+<body onclick="clickBody()">
+<div class="title">
+    <p>万宁市工商行政管理局本周"双随机"业务公示</p>
+    <p class="small">本周全市处理业务双随机业务<span>20</span>件，检查出异常企业<span>5</span>家，已完成检查<span>9</span>，待检查企业<span>1</span>家。</p>
+</div>
+<div>
+    <table class="thread">
+        <tbody>
+        <tr>
+            <th>编号</th>
+            <th>监管事项</th>
+            <th>企业名称</th>
+            <th>企业注册号</th>
+            <th>抽查时间</th>
+            <th>抽查结果</th>
+            <th>查处结果</th>
+            <th>整改结果</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="maquee">
+    <table class="tbody">
+        <tbody id="tContent">
+        </tbody>
+    </table>
+</div>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/publicity/publicity.controller.js"></script>
+</body>
+</html>

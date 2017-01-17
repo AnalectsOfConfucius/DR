@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css" rel="stylesheet">
+    <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/plugins/webuploader/webuploader.css" rel="stylesheet">
+    <link href="/assets/css/demo/webuploader-demo.css" rel="stylesheet">
+    <style>
+        .h5Class {
+            padding: 0;
+            margin: 0;
+            height: 50px;
+            line-height: 50px;
+            text-indent: 20px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-worppar {
+            max-width: 900px;
+            background: #fff;
+            border-radius: 5px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12 animated fadeInRight">
+            <div class="mail-box-header">
+                <div class="pull-right tooltip-demo">
+                    <a href="javascript:;" onclick="javascript:history.back(-1);" class="btn btn-white btn-sm"
+                       title="返回上一页"><i class="fa fa-reply"></i> 返回</a>
+                    <a href="mail_detail.html#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="打印任务"><i class="fa fa-print"></i> 打印</a>
+                </div>
+                <h2>
+                    执法结果处理
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <h5 id="tContent">
+                    </h5>
+                </div>
+            </div>
+            <div class="mail-box">
+                <div class="mail-body">
+                    <form class="form-horizontal" method="get">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">抽查结果：</label>
+
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option></option>
+                                    <option>正常</option>
+                                    <option>未按规定公示年报</option>
+                                    <option>未按规定公示其他应当公示的信息</option>
+                                    <option>公示信息隐瞒真实情况、弄虚作假</option>
+                                    <option>通过登记的住所（经营场所）无法联系</option>
+                                    <option>不予配合情节严重</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">结果处理：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b deal" name="account">
+                                    <option></option>
+                                    <option value="0">正常</option>
+                                    <option value="1">列入异常名录</option>
+                                    <option value="2">责令整改</option>
+                                    <option value="3">转案件处理</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注：</label>
+                            <div class="col-sm-10">
+                                    <textarea id="comment" name="comment" class="form-control" required
+                                              aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">证据文件：</label>
+                            <div class="col-sm-10">
+                                <div class="page-container">
+                                    <div id="uploader" class="wu-example">
+                                        <div class="queueList">
+                                            <div id="dndArea" class="placeholder">
+                                                <div id="filePicker"></div>
+                                                <p>或将照片拖到这里，单次最多可选300张</p>
+                                            </div>
+                                        </div>
+                                        <div class="statusBar" style="display:none;">
+                                            <div class="progress">
+                                                <span class="text">0%</span>
+                                                <span class="percentage"></span>
+                                            </div>
+                                            <div class="info"></div>
+                                            <div class="btns">
+                                                <div id="filePicker2"></div>
+                                                <div class="uploadBtn">开始上传</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a class="btn btn-primary" href="mail_compose.html">完成任务<i class="fa fa-arrow-right"></i> </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--列入异常名录 S-->
+<div class="modal fade" id="myModal1" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">申请列入异常名录</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">企业名称：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">注册号：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">经营地址：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">法人代表：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">抽查日期：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">抽查事项：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">抽查结果：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment2" name="comment" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a type="button" class="btn btn-primary" data-dismiss="modal"
+                               style="position:absolute; right: 31px; bottom:10px;">提交申请</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--列入异常名录 E-->
+<!--责令整改 S-->
+<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">责令整改</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">整改期限：</label>
+                            <div class="col-sm-6">
+                                <input readonly class="form-control layer-date" id="hello1">
+                                <label class="laydate-icon inline demoicon"
+                                       onclick="laydate({elem: '#hello1'});"></label>
+                            </div>
+                        </div>
+                        <a type="button" class="btn btn-primary" data-dismiss="modal"
+                           style="position:absolute; right: 31px; bottom:10px;">提交</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--责令整改 E-->
+<!--转案件处理 S-->
+<div class="modal fade" id="myModal3" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">转案件处理</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">部门名称：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option></option>
+                                    <option>行政审批办公室</option>
+                                    <option>企业监管室</option>
+                                    <option>市场规范管理室</option>
+                                    <option>12315指挥中心</option>
+                                    <option>商标广告管理室</option>
+                                    <option>政策法制室</option>
+                                    <option>公平交易与消费者权益保护室</option>
+                                    <option>纪检监察室</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">部门负责人：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">办公室电话：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手机：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group" id="data">
+                            <label class="col-sm-2 control-label">立案日期：</label>
+                            <div class="col-sm-6">
+                                <input readonly class="form-control layer-date" id="hello2">
+                                <label class="laydate-icon inline demoicon"
+                                       onclick="laydate({elem: '#hello2'});"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment1" name="comment" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <a type="button" class="btn btn-primary" data-dismiss="modal"
+                           style="position:absolute; left: 350px; bottom:0px;"><i class="fa fa-envelope"></i>Email</a>
+                        <a type="button" class="btn btn-primary" data-dismiss="modal"
+                           style="position:absolute; right: 350px; bottom:0px;"><i class="fa fa-comment"></i>短信提醒</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--转案件处理 E-->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script type="text/javascript">
+    // 添加全局站点信息
+    var BASE_URL = '/assets/js/plugins/webuploader';
+</script>
+<script src="/assets/js/plugins/webuploader/webuploader.min.js"></script>
+<script src="/assets/js/demo/webuploader-demo.js"></script>
+<script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/task/taskDetail.controller.js"></script>
+<script src="/assets/js/plugins/layer/laydate/laydate.js"></script>
+<script>
+    //外部js调用
+    laydate({
+        elem: '#hello', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+        event: 'focus', //响应事件。如果没有传入event，则按照默认的click
+    });
+    /**TODO
+     *这里有一个length属性为定义的bug
+     */
+
+        //日期范围限制
+    var start = {
+            elem: '#start',
+            format: 'YYYY/MM/DD hh:mm:ss',
+            min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16 23:59:59', //最大日期
+            istime: true,
+            istoday: true,
+        };
+    laydate(start);
+</script>
+</body>
+</html>

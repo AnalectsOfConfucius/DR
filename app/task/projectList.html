@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/assets/css/pagination.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!-- 引用控制层插件样式 -->
+    <link rel="stylesheet" href="/assets/css/zyUpload.css" type="text/css">
+    <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <style>
+        /*table {
+            word-break: keep-all;
+            white-space: nowrap;
+        }*/
+
+        .wilq a {
+            font-size: 15px;
+            padding-right: 5px;
+        }
+
+        .h5Class {
+            padding: 0;
+            margin: 0;
+            height: 50px;
+            line-height: 50px;
+            text-indent: 20px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-worppar {
+            max-width: 900px;
+            background: #fff;
+            border-radius: 5px;
+            margin: 30px auto;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td {
+            text-align: center;
+            font-size: 14px;
+            height: 27px;
+            line-height: 27px;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td:last-child {
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .ibox-content table tr td a {
+            padding: 0 5px;
+        }
+
+        .titleCon a i {
+            position: relative;
+            font-size: 25px;
+            color: #000;
+        }
+
+        .ibox-title {
+            margin-top: 10px;
+            border-width: 1px 0 0;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>随机抽查事项清单</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" id="query" class="form-control"> <span class="input-group-btn"> <button
+                                    type="button" class="btn btn-primary search-action">搜索
+                                        </button> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal0">添加
+                    </button>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>检查项目</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tContent">
+                        </tbody>
+                    </table>
+                    <!--分页 S-->
+                    <div class="pages clearfix">
+                        <div id="Pagination"></div>
+                    </div>
+                    <!--分页 E-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加 S-->
+<div class="modal fade" id="myModal0" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">添加项目信息</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="add" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">项目名称：</label>
+                            <div class="col-sm-10">
+                                <input name="taskProjectName" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">检查主体：</label>
+                            <div class="col-sm-10">
+                                <input name="taskProjectCheckDepartment" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">说明：</label>
+                            <div class="col-sm-10">
+                                <textarea name="description" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2 pb20">
+                                <a class="btn btn-primary add-action">保存</a>
+                            </div>
+                        </div>
+                        <input type="reset" name="reset" hidden/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加 E-->
+<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">任务详情</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>子序号</th>
+                            <th>子项目</th>
+                            <th>检查主体</th>
+                            <th>检查内容</th>
+                            <th>检查依据</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tContentChild">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--跟踪 S-->
+<div class="modal fade" id="myModal3" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">企业状态跟踪</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">企业名称：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">企业注册号：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">抽查结果：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account" disabled="">
+                                    <option></option>
+                                    <option>万宁市本局</option>
+                                    <option>地方局</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">整改内容：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">法律法规依据：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment" name="comment" class="form-control" required
+                                          aria-required="true" disabled=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">企业状态：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option></option>
+                                    <option>万宁市本局</option>
+                                    <option>地方局</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2 pb20">
+                            <a class="btn btn-primary" type="submit">保存</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--跟踪 E-->
+<!--延期 S-->
+<div class="modal fade" id="myModal1_1" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">申请任务延期</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group data">
+                            <label class="col-sm-2 control-label">计划检查时间：</label>
+                            <div class="col-sm-6">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" value="2015-12-11" disabled="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group data">
+                            <label class="col-sm-2 control-label">申请延期到：</label>
+                            <div class="col-sm-6">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="col-sm-6 col-sm-offset-2 pb20">
+                            <a class="btn btn-primary" type="submit">提交</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--延期 E-->
+<!--修改 S-->
+<div class="modal fade" id="myModal2_0" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">添加执法人员信息</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">姓名：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">证件编号：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">证件类型：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属工商局：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option></option>
+                                    <option>万宁市本局</option>
+                                    <option>地方局</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">执法区域：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option></option>
+                                    <option>万宁市</option>
+                                    <option>地方</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">黑白名单：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="account">
+                                    <option></option>
+                                    <option>黑名单</option>
+                                    <option>白名单</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment11" name="comment" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2 pb20">
+                            <a class="btn btn-primary" type="submit">保存</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改 E-->
+<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="/assets/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/assets/js/content.min.js?v=1.0.0"></script>
+<script src="/assets/js/jquery.pagination.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/task/projectList.controller.js"></script>
+</body>
+</html>

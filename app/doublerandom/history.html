@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/assets/css/animate.min.css" rel="stylesheet">
+    <link href="/assets/css/style.min.css" rel="stylesheet">
+    <link href="/assets/css/pagination.css" rel="stylesheet">
+    <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/assets/css/plugins/chosen/chosen.min.css" rel="stylesheet">
+    <style>
+        .wilq a {
+            font-size: 15px;
+            padding-right: 5px;
+        }
+
+        .h5Class {
+            padding: 0;
+            margin: 0;
+            height: 50px;
+            line-height: 50px;
+            text-indent: 20px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-worppar {
+            max-width: 1000px;
+            background: #fff;
+            border-radius: 5px;
+            margin: 30px auto;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td {
+            text-align: center;
+            font-size: 14px;
+            height: 27px;
+            line-height: 27px;
+        }
+
+        .ibox-content table tr th,
+        .ibox-content table tr td:last-child {
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        .ibox-content table tr td a {
+            padding: 0 5px;
+        }
+
+        .titleCon a i {
+            position: relative;
+            font-size: 25px;
+            color: #000;
+        }
+
+        .ibox-title {
+            margin-top: 10px;
+            border-width: 1px 0 0;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInRight">
+    <div class="col-sm-4">
+        <h2>双随机历史记录</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>双随机抽查结果列表</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" id="query" class="form-control"> <span class="input-group-btn"> <button
+                                    type="button" class="btn btn-primary search-action">搜索
+                                        </button> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal0">导入
+                    </button>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>抽查序号</th>
+                            <th>抽查任务名称</th>
+                            <th>抽查时间</th>
+                            <th>公证人</th>
+                            <th>抽查主体数量</th>
+                            <th>抽查的市场主体类型</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tContent">
+                        </tbody>
+                    </table>
+                    <!--分页 S-->
+                    <div class="pages clearfix">
+                        <div id="Pagination"></div>
+                    </div>
+                    <!--分页 E-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情 S-->
+<div class="modal fade" id="myModal0" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">修改双随机抽查任务</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">方案名称：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" value="${name}" class="form-control" required
+                                       aria-required="true" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">公正人：</label>
+                            <div class="col-sm-10">
+                                <input name="name" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注信息：</label>
+                            <div class="col-sm-10">
+                                <textarea id="comment" name="comment" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2 pb20">
+                                <a class="btn btn-primary import-action" type="submit">保存</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情 E-->
+<!--详情 S-->
+<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">执法结果信息</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <button class="btn btn-primary" style="margin-bottom: 8px;" type="submit" data-toggle="modal"
+                            data-target="#myModal2_0">打印
+                    </button>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>企业名称</th>
+                            <th>注册号</th>
+                            <th>检查机关</th>
+                            <th>检查时间</th>
+                            <th>检查事项</th>
+                            <th>检查人</th>
+                            <th>抽查结果</th>
+                            <th>结果处理</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tContentChild">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2_0" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">添加任务清单</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>任务清单</th>
+                            <th>具体内容</th>
+                            <th>说明</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked class="i-checks" name="input[]">
+                            </td>
+                            <td>行政执法</td>
+                            <td>100</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked class="i-checks" name="input[]">
+                            </td>
+                            <td>行政执法</td>
+                            <td>100</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked class="i-checks" name="input[]">
+                            </td>
+                            <td>行政执法</td>
+                            <td>100</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked class="i-checks" name="input[]">
+                            </td>
+                            <td>行政执法</td>
+                            <td>100</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked class="i-checks" name="input[]">
+                            </td>
+                            <td>行政执法</td>
+                            <td>100</td>
+                            <td>50</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal2_0">确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情 E-->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/content.js"></script>
+<script src="/assets/js/jquery.pagination.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/chosen/chosen.jquery.min.js"></script>
+<script src="/assets/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/doublerandom/history.controller.js"></script>
+<script>
+    $('#file-pretty').prettyFile();
+    $('.chosen-select').chosen({});
+    $("#Pagination").pagination("150");
+    $('.delete-action').click(function () {
+        swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要删除！",
+                cancelButtonText: "让我再考虑一下…",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                } else {
+                    swal("已取消", "您取消了删除操作！", "error");
+                }
+            });
+    });
+    $('.import-action').click(function () {
+        swal({
+            title: "导入结果",
+            text: "导入成功10条双随机任务，失败20条。请修改失败条目格式后重新导入，点击下载<a href='https://github.com/normanmaurer/netty-in-action/archive/master.zip' download=''>导入失败条目文件</a>",
+            type: "success",
+            html: true,
+        });
+    });
+    var tpl = [
+        '{@each companies as it,index}',
+        '<tr>',
+        '<td>${it.id}</td>',
+        '<td>${it.task_name}</td>',
+        '<td>${it.check_time}</td>',
+        '<td>${it.check_witness}</td>',
+        '<td>${it.check_market_num}</td>',
+        '<td>${it.check_market_type}</td>',
+        '<td>',
+        '<a href="javascript:;" data-toggle="modal" data-target="#myModal2">详情</a>',
+        '<a href="javascript:;" data-toggle="modal" data-target="#myModal0">修改</a>',
+        '<a href="javascript:;" class="delete-action">删除</a>',
+        '</td>',
+        '</tr>',
+        '{@/each}'].join('');
+    var data = {
+        companies: [
+            {
+                id: 1,
+                task_name:"营业执照检查",
+                check_time:"2017-01-11",
+                check_witness:"张三",
+                check_market_num:3,
+                check_market_type:"农林渔牧业",
+            },
+            {
+                id: 2,
+                task_name:"营业执照检查",
+                check_time:"2017-01-11",
+                check_witness:"李四",
+                check_market_num:2,
+                check_market_type:"农林渔牧业",
+            },
+            {
+                id: 3,
+                task_name:"营业执照检查",
+                check_time:"2017-01-11",
+                check_witness:"王五",
+                check_market_num:2,
+                check_market_type:"农林渔牧业",
+            },
+            {
+                id: 4,
+                task_name:"营业执照检查",
+                check_time:"2017-01-11",
+                check_witness:"马六",
+                check_market_num:3,
+                check_market_type:"农林渔牧业",
+            },
+
+        ]
+    };
+    var html = juicer(tpl, data);
+    console.log(html);
+    $('#tContent').html(html);
+
+
+    var tpl1 = [
+        '{@each companies as it,index}',
+        '<tr>',
+        '<td>${it.id}</td>',
+        '<td>${it.company_name}</td>',
+        '<td>${it.registered_time}</td>',
+        '<td>${it.check_organ}</td>',
+        '<td>${it.check_time}</td>',
+        '<td>${it.check_object}</td>',
+        '<td>${it.check_man}</td>',
+        '<td>${it.check_result}</td>',
+        '<td>${it.result_handler}</td>',
+        '<td>${it.status}</td>',
+
+        '</tr>',
+        '{@/each}'].join('');
+    var data1 = {
+        companies: [
+            {
+                id: 1,
+                company_name:"龙滚椰子集团",
+                registered_time:"2015-01-11",
+                registered_num:20150111,
+                check_organ:"龙滚工商所",
+                check_time:"2017-01-05",
+                check_object:"是否有营业执照",
+                check_man:"张三，李四",
+                check_result:"正常",
+                result_handler:"",
+                status:"正常"
+            },
+            {
+                id: 2,
+                company_name:"山根养猪厂",
+                registered_time:"2013-02-11",
+                registered_num:20130211,
+                check_organ:"山根工商所",
+                check_time:"2017-01-05",
+                check_object:"是否有营业执照",
+                check_man:"王五，田七",
+                check_result:"正常",
+                result_handler:"",
+                status:"正常"
+            },
+            {
+                id: 3,
+                company_name:"万宁化肥厂",
+                registered_time:"2011-03-21",
+                registered_num:20110321,
+                check_organ:"万宁工商局",
+                check_time:"2017-01-05",
+                check_object:"是否有营业执照",
+                check_man:"王琦，逍遥",
+                check_result:"不予配合情节严重",
+                result_handler:"转企业监管室立案处理",
+                status:"正在处理中"
+            }
+        ]
+    };
+    var html1 = juicer(tpl1, data1);
+    console.log(html1);
+    $('#tContent1').html(html1);
+</script>
+</body>
+</html>
