@@ -4,28 +4,13 @@ $(function () {
         initQuery(0, 10);
     });
     $('.add-modal').bind('click', function() {
-        $.ajax({
-            url: window.apiPoint + 'lawenforce-departments',
-            type: 'GET',
-            async: true,
-            dataType: 'json',
-            success: function (data) {
-                if (data) {
-                    var result= {};
-                    result["departments"] = data;
-                    var tpl = [
-                        '<option></option>',
-                        '{@each departments as it,index}',
-                        '<option value="${it.id}">${it.departmentName}</option>',
-                        '{@/each}'].join('');
-                    var html = juicer(tpl, result);
-                    $('#addOptionFirst').html(html);
-                }
-            },
-        });
+        initAddOne();
     });
     $('.add-action').bind('click', function () {
         addOne();
+    });
+    $('.update-action').bind('click', function () {
+        updateOne();
     });
 });
 
@@ -79,14 +64,11 @@ function initQuery(page, size) {
     });
 };
 
-function pageQuery(page_index) {
-    initQuery(page_index, 10);
-};
-
 function initPage(page, size) {
     var dataQuery = {
         page: page,
-        size: size
+        size: size,
+        sort: 'id,desc'
     };
     $.ajax({
         url: window.apiPoint + 'managers',
@@ -115,7 +97,7 @@ function initPage(page, size) {
                     '<td>{@if it.description != null }${it.description}{@/if}</td>',
                     '<td>',
                     '<a href="javascript:;" onclick="detailOne(${it.id})" data-toggle="modal" data-target="#myModal1">查看</a>',
-                    '<a href="javascript:;" onclick="updateOne(${it.id})" data-toggle="modal" data-target="#myModal2">修改</a>',
+                    '<a href="javascript:;" onclick="initUpdateOne(${it.id})" data-toggle="modal" data-target="#myModal2">修改</a>',
                     '<a href="javascript:;" onclick="deleteOne(${it.id})">删除</a>',
                     '</td>',
                     '</tr>',
@@ -131,6 +113,74 @@ function initPage(page, size) {
     });
 };
 
+function initAddOne() {
+    $.ajax({
+        url: window.apiPoint + 'lawenforce-departments',
+        type: 'GET',
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                var result= {};
+                result["lawenforceDepartments"] = data;
+                var tpl = [
+                    '<option></option>',
+                    '{@each lawenforceDepartments as it,index}',
+                    '<option value="${it.id}">${it.departmentName}</option>',
+                    '{@/each}'].join('');
+                var html = juicer(tpl, result);
+                $('.lawenforceDepartments').html(html);
+            }
+        },
+    });
+}
+
+function initUpdateOne(id) {
+    $.ajax({
+        url: window.apiPoint + 'lawenforce-departments',
+        type: 'GET',
+        async: false,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                var result= {};
+                result["lawenforceDepartments"] = data;
+                var tpl = [
+                    '<option></option>',
+                    '{@each lawenforceDepartments as it,index}',
+                    '<option value="${it.id}">${it.departmentName}</option>',
+                    '{@/each}'].join('');
+                var html = juicer(tpl, result);
+                $('.lawenforceDepartments').html(html);
+            }
+        },
+    });
+    $.ajax({
+        url: window.apiPoint + 'managers/' + id,
+        type: 'GET',
+        async: true,
+        dataType: 'json',
+        success: function (data, status, xhr) {
+            if (data) {
+                console.log(data);
+                $("#update").find("input[name=id]").val(data.id);
+                $("#update").find("input[name=managerName]").val(data.managerName);
+                $("#update").find("input[name=managerHNCard]").val(data.managerHNCard);
+                $("#update").find("input[name=managerICCard]").val(data.managerICCard);
+                $("#update").find("input[name=managerPhone]").val(data.managerPhone);
+                $("#update").find("select[name=managerSex]").val(data.managerSex);
+                $("#update").find("select[name=managerFlag]").val(data.managerFlag);
+                $("#update").find("textarea[name=description]").val(data.description);
+                $("#update").find("select[name=lawenforceDepartment]").val(data.managerLawenforceDepartment.id);
+            }
+        },
+    });
+};
+
+function pageQuery(page_index) {
+    initQuery(page_index, 10);
+};
+
 function pageSelect(page_index) {
     initPage(page_index, 10);
 };
@@ -143,7 +193,7 @@ function addOne() {
     var managerSex = $("#add").find("select[name=managerSex]").val();
     var managerFlag = $("#add").find("select[name=managerFlag]").val();
     var description = $("#add").find("textarea[name=description]").val();
-    var managerLawenforceDepartmentId = $("#add").find("select[name=managerLawenforceDepartmentId]").val();
+    var managerLawenforceDepartmentId = $("#add").find("select[name=lawenforceDepartment]").val();
     var managerLawenforceDepartment = {id: managerLawenforceDepartmentId};
     var dataPost = {
         managerName: managerName,
@@ -171,7 +221,7 @@ function addOne() {
             }
         },
     });
-}
+};
 
 function deleteOne(id) {
     swal({
@@ -222,49 +272,49 @@ function detailOne(id) {
                 $("#detail").find("select[name=managerSex]").val(data.managerSex);
                 $("#detail").find("select[name=managerFlag]").val(data.managerFlag);
                 $("#detail").find("textarea[name=description]").val(data.description);
-                $("#detail").find("input[name=managerLawenforceDepartmentId]").val(data.managerLawenforceDepartment.departmentName);
+                $("#detail").find("input[name=lawenforceDepartment]").val(data.managerLawenforceDepartment.departmentName);
             }
         },
     });
 };
 
-function updateOne(id) {
+function updateOne() {
+    var id = $("#update").find("input[name=id]").val();
+    var managerName = $("#update").find("input[name=managerName]").val();
+    var managerHNCard = $("#update").find("input[name=managerHNCard]").val();
+    var managerICCard = $("#update").find("input[name=managerICCard]").val();
+    var managerPhone = $("#update").find("input[name=managerPhone]").val();
+    var managerSex = $("#update").find("select[name=managerSex]").val();
+    var managerFlag = $("#update").find("select[name=managerFlag]").val();
+    var description = $("#update").find("textarea[name=description]").val();
+    var managerLawenforceDepartmentId = $("#update").find("select[name=lawenforceDepartment]").val();
+    var managerLawenforceDepartment = {id: managerLawenforceDepartmentId};
+    var dataPost = {
+        id: id,
+        managerName: managerName,
+        managerHNCard: managerHNCard,
+        managerICCard: managerICCard,
+        managerSex: managerSex,
+        managerFlag: managerFlag,
+        managerPhone: managerPhone,
+        description: description,
+        managerLawenforceDepartment: managerLawenforceDepartment
+    };
+    console.log(dataPost);
     $.ajax({
-        url: window.apiPoint + 'lawenforce-departments',
-        type: 'GET',
-        async: false,
+        url: window.apiPoint + 'managers',
+        type: 'PUT',
+        // 序列化Json对象为Json字符串
+        data: JSON.stringify(dataPost),
+        async: true,
         dataType: 'json',
         success: function (data) {
             if (data) {
-                var result= {};
-                result["departments"] = data;
-                var tpl = [
-                    '<option></option>',
-                    '{@each departments as it,index}',
-                    '<option value="${it.id}">${it.departmentName}</option>',
-                    '{@/each}'].join('');
-                var html = juicer(tpl, result);
-                $('#updateOptionFirst').html(html);
-            }
-        },
-    });
-    $.ajax({
-        url: window.apiPoint + 'managers/' + id,
-        type: 'GET',
-        async: true,
-        dataType: 'json',
-        success: function (data, status, xhr) {
-            if (data) {
-                console.log(data);
-                $("#update").find("input[name=managerName]").val(data.managerName);
-                $("#update").find("input[name=managerHNCard]").val(data.managerHNCard);
-                $("#update").find("input[name=managerICCard]").val(data.managerICCard);
-                $("#update").find("input[name=managerPhone]").val(data.managerPhone);
-                $("#update").find("select[name=managerSex]").val(data.managerSex);
-                $("#update").find("select[name=managerFlag]").val(data.managerFlag);
-                $("#update").find("textarea[name=description]").val(data.description);
-                $("#update").find("select[name=managerLawenforceDepartmentId]").val(data.managerLawenforceDepartment.id);
+                initPage(0, 10);
+                $('#myModal2').modal('hide');
+                $('input[name=reset]').trigger("click");
             }
         },
     });
 };
+

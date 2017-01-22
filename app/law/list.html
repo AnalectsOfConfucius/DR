@@ -12,9 +12,7 @@
     <link href="/assets/css/animate.min.css" rel="stylesheet">
     <link href="/assets/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="/assets/css/pagination.css" rel="stylesheet">
-    <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <!-- 引用控制层插件样式 -->
     <link rel="stylesheet" href="/assets/css/zyUpload.css" type="text/css">
 </head>
 <body class="gray-bg">
@@ -24,38 +22,19 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <label style="font-size:14px">所属工商所：</label>
-                            <select style="width:150px; height:32px; margin-top:2px; margin-right: 5px;">
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-                            <label style="font-size:14px">执法区域：</label>
-                            <select style="width:150px; height:32px; margin-top:2px; margin-right: 5px;">
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-                            <label style="font-size:14px">黑白名单：</label>
-                            <select style="width:150px; height:32px; margin-top:2px; margin-right: 5px;">
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-                            <label style="font-size:14px">用户姓名：</label>
-                            <input type="text" style="height:32px">
-                            <button type="button" class="btn btn-primary pull-right">搜索</button>
+                        <div class="col-md-6">
+                            <h4>法律法规库</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" id="query" class="form-control"> <span class="input-group-btn"> <button
+                                    type="button" class="btn btn-primary search-action">搜索
+                                        </button> </span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal0">添加
-                    </button>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -92,71 +71,12 @@
                                 <a href="javascript:;" class="delete-action">删除</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>HN-WN0806113(A)</td>
-                            <td>海南省行政执法</td>
-                            <td>2016年10月1日</td>
-                            <td>2016年11月1日</td>
-                            <td>3213</td>
-                            <td>3123213123</td>
-                            <td>123</td>
-                            <td>2132</td>
-                            <td>32121</td>
-                            <td>32121</td>
-                            <td>有效</td>
-                            <td>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal1">相关文件</a>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal2">相关资料</a>
-                                <a href="javascript:;" class="delete-action">删除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>HN-WN0806113(A)</td>
-                            <td>海南省行政执法</td>
-                            <td>2016年10月1日</td>
-                            <td>2016年11月1日</td>
-                            <td>3213</td>
-                            <td>3123213123</td>
-                            <td>123</td>
-                            <td>2132</td>
-                            <td>32121</td>
-                            <td>32121</td>
-                            <td>有效</td>
-                            <td>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal1">相关文件</a>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal2">相关资料</a>
-                                <a href="javascript:;" class="delete-action">删除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>HN-WN0806113(A)</td>
-                            <td>海南省行政执法</td>
-                            <td>2016年10月1日</td>
-                            <td>2016年11月1日</td>
-                            <td>3213</td>
-                            <td>3123213123</td>
-                            <td>123</td>
-                            <td>2132</td>
-                            <td>32121</td>
-                            <td>32121</td>
-                            <td>有效</td>
-                            <td>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal1">相关文件</a>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal2">相关资料</a>
-                                <a href="javascript:;" class="delete-action">删除</a>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                     <!--分页 S-->
-                    <div class="pages clearfix">
-                        <div id="Pagination"></div>
-                        <div class="searchPage">
-                            <span class="page-sum">共<strong class="allPage">15</strong>页</span>
-                            <span class="page-go">跳转<input type="text">页</span>
-                            <a href="javascript:;" class="page-btn">GO</a>
-                        </div>
-                    </div>
+                    <!--<div class="pages clearfix">-->
+                        <!--<div id="Pagination"></div>-->
+                    <!--</div>-->
                     <!--分页 E-->
 
                 </div>

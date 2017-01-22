@@ -113,23 +113,23 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">警示牌名称：</label>
                             <div class="col-sm-10">
-                                <input name="taskProjectName" minlength="1" type="text" class="form-control" required
+                                <input name="signName" minlength="1" type="text" class="form-control" required
                                        aria-required="true">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">超期天数：</label>
                             <div class="col-sm-10">
-                                <input name="taskProjectCheckDepartment" minlength="1" type="text" class="form-control" required
+                                <input name="signConfig" minlength="1" type="text" class="form-control" required
                                        aria-required="true">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2 pb20">
                                 <a class="btn btn-primary add-action">保存</a>
+                                <input type="reset" name="reset" hidden/>
                             </div>
                         </div>
-                        <input type="reset" name="reset" hidden/>
                     </form>
                 </div>
             </div>
@@ -150,23 +150,24 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">警示牌名称：</label>
                             <div class="col-sm-10">
-                                <input name="taskProjectName" minlength="1" type="text" class="form-control" required
+                                <input name="signName" minlength="1" type="text" class="form-control" required
                                        aria-required="true">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">超期天数：</label>
                             <div class="col-sm-10">
-                                <input name="taskProjectCheckDepartment" minlength="1" type="text" class="form-control" required
+                                <input name="signConfig" minlength="1" type="text" class="form-control" required
                                        aria-required="true">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2 pb20">
-                                <a class="btn btn-primary add-action">保存</a>
+                                <a class="btn btn-primary update-action">保存</a>
+                                <input type="reset" name="reset" hidden/>
+                                <input type="text" name="id" hidden/>
                             </div>
                         </div>
-                        <input type="reset" name="reset" hidden/>
                     </form>
                 </div>
             </div>
@@ -185,6 +186,16 @@
 <script src="/app/service/ajax.service.js"></script>
 <script>
     $(function () {
+        initPage(0, 10);
+
+        $('.add-action').click(function () {
+            addOne();
+        });
+
+        $('.update-action').click(function () {
+            updateOne();
+        });
+
         $('.delete-action').click(function () {
             swal({
                     title: "您确定要删除这条信息吗",
@@ -207,37 +218,103 @@
         });
     });
 
-    var tpl = [
-        '{@each companies as it,index}',
-        '<tr>',
-        '<td>${it.id}</td>',
-        '<td>${it.warningSign}</td>',
-        '<td>${it.overTime}</td>',
-        '<td>',
-        '<a href="javascript:;" data-toggle="modal" data-target="#myModal1">编辑</a>',
-        '<a href="javascript:;" class="delete-action">删除</a>',
-        '</td>',
-        '</tr>',
-        '{@/each}'].join('');
-    var data = {
-        companies: [
-            {
-                id: 1,
-                warningSign:"黄牌",
-                overTime: 1,
-
+    function addOne() {
+        var signName = $('#add').find('input[name=signName]').val();
+        var day = $('#add').find('input[name=signConfig]').val();
+        var dataPost = {
+            signName: signName,
+            signConfig: day,
+            signCss: 'danger',
+        };
+        console.log(dataPost);
+        $.ajax({
+            url: window.apiPoint + 'signs',
+            type: 'POST',
+            // 序列化Json对象为Json字符串
+            data: JSON.stringify(dataPost),
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    initPage(0, 10);
+                    $('#myModal0').modal('hide');
+                    $('input[name=reset]').trigger("click");
+                }
             },
-            {
-                id: 2,
-                warningSign:"红牌",
-                overTime: 7,
-            }
-
-        ]
+        });
     };
-    var html = juicer(tpl, data);
-    console.log(html);
-    $('#tContent').html(html);
+
+    function initUpdateOne(id) {
+        $('#update').find('input[name=id]').val(id);
+    }
+
+    function updateOne() {
+        var signName = $('#update').find('input[name=signName]').val();
+        var day = $('#update').find('input[name=signConfig]').val();
+        var id = $('#update').find('input[name=id]').val();
+        var dataPost = {
+            id: id,
+            signName: signName,
+            signConfig: day,
+            signCss: 'danger',
+        };
+        console.log(dataPost);
+        $.ajax({
+            url: window.apiPoint + 'signs',
+            type: 'PUT',
+            // 序列化Json对象为Json字符串
+            data: JSON.stringify(dataPost),
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    initPage(0, 10);
+                    $('#myModal1').modal('hide');
+                    $('input[name=reset]').trigger("click");
+                }
+            },
+        });
+    };
+
+    function initPage(page, size) {
+        var dataQuery = {
+            page: page,
+            size: size,
+            sort: 'id,desc'
+        };
+
+        $.ajax({
+            url: window.apiPoint + 'signs',
+            type: 'GET',
+            // GET请求传递data
+            data: dataQuery,
+            async: true,
+            dataType: 'json',
+            success: function (data, status, xhr) {
+                if (data) {
+                    console.log(data);
+                    var result = {};
+                    result['signs'] = data;
+                    var totalCount = xhr.getResponseHeader("X-Total-Count");
+                    var nowpage = parseInt(totalCount / dataQuery.size);
+                    console.log(nowpage);
+                    var tpl = [
+                        '{@each signs as it,index}',
+                        '<tr>',
+                        '<td>${it.id}</td>',
+                        '<td>${it.signName}</td>',
+                        '<td>${it.signConfig}</td>',
+                        '<td>',
+                        '<a href="javascript:;" onclick="initUpdateOne(${it.id})" data-toggle="modal" data-target="#myModal1">编辑</a>',
+                        '</td>',
+                        '</tr>',
+                        '{@/each}'].join('');
+                    var html = juicer(tpl, result);
+                    $('#tContent').html(html);
+                }
+            },
+        });
+    };
 </script>
 </body>
 </html>

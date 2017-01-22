@@ -48,62 +48,9 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>海南省儒家酒店</td>
-                            <td>万宁市工商局</td>
-                            <td>段尼</td>
-                            <td>商标注册情况</td>
-                            <td>2016年12月26日</td>
-                            <td>未按规定公示年报</td>
-                            <td>公示年报</td>
-                            <td><span class="label label-danger">2017年1月26日</span></td>
-                            <td>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal0">整改结果</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>海南省万宁市东北人家菜馆</td>
-                            <td>万宁市工商局</td>
-                            <td>万宁工商局</td>
-                            <td>商标注册情况</td>
-                            <td>2016年12月26日</td>
-                            <td>未按规定公示年报</td>
-                            <td>公示年报</td>
-                            <td><span class="label label-danger">2017年1月29日</span></td>
-                            <td>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal0">整改结果</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>海南省万宁市湖南人家</td>
-                            <td>万宁市工商局</td>
-                            <td>段尼</td>
-                            <td>商标注册情况</td>
-                            <td>2016年12月26日</td>
-                            <td>未按规定公示年报</td>
-                            <td>公示年报</td>
-                            <td><span class="label label-danger">2017年1月27日</span></td>
-                            <td>
-                                <a href="javascript:;" data-toggle="modal" data-target="#myModal0">整改结果</a>
-                            </td>
-                        </tr>
+                        <tbody id="tContent">
                         </tbody>
                     </table>
-                    <!--分页 S-->
-                    <div class="pages clearfix">
-                        <div id="Pagination"></div>
-                        <div class="searchPage">
-                            <span class="page-sum">共<strong class="allPage">15</strong>页</span>
-                            <span class="page-go">跳转<input type="text">页</span>
-                            <a href="javascript:;" class="page-btn">GO</a>
-                        </div>
-                    </div>
-                    <!--分页 E-->
-
                 </div>
             </div>
         </div>
@@ -118,7 +65,8 @@
                 <a type="button" class="btn btn-primary" data-dismiss="modal"
                    style="position:absolute; right: 31px; top: 10px;">关闭</a>
                 <div class="ibox-content">
-                    <form class="form-horizontal m-t" novalidate="novalidate">
+                    <form class="form-horizontal m-t" id="finish" novalidate="novalidate">
+                        <input type="text" name="id" hidden>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">企业名称：</label>
                             <div class="col-sm-10">
@@ -136,14 +84,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">整改结果：</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="account">
+                                <select class="form-control m-b" name="resultStatus">
                                     <option></option>
-                                    <option>正常</option>
-                                    <option>转案件处理</option>
+                                    <option value="正常">正常</option>
+                                    <option value="转案件处理">转案件处理</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="col-sm-2 control-label">企业状态：</label>
                             <div class="col-sm-10">
@@ -154,12 +101,12 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
-                    <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-2 pb20">
-                            <a class="btn btn-primary" type="submit">完成任务</a>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2 pb20">
+                                <a class="btn btn-primary finish" type="submit">完成任务</a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
             </div>
@@ -428,5 +375,9 @@
             });
     });
 </script>
+<script src="/assets/js/juicer-min.js"></script>
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/task/taskBoxModifyList.controller.js"></script>
 </body>
 </html>

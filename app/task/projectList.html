@@ -3,26 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link href="/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/animate.css" rel="stylesheet">
-    <link href="/assets/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="/assets/css/pagination.css" rel="stylesheet">
-    <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <!-- 引用控制层插件样式 -->
-    <link rel="stylesheet" href="/assets/css/zyUpload.css" type="text/css">
+    <link href="/assets/css/zyUpload.css" rel="stylesheet">
     <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <style>
-        /*table {
-            word-break: keep-all;
-            white-space: nowrap;
-        }*/
-
         .wilq a {
             font-size: 15px;
             padding-right: 5px;
@@ -96,7 +86,9 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal0">添加
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal0_1">添加一级项目
+                    </button>
+                    <button class="btn btn-primary add-two-modal" data-toggle="modal" data-target="#myModal0_2">添加二级清单
                     </button>
                     <table class="table table-bordered">
                         <thead>
@@ -121,26 +113,19 @@
     </div>
 </div>
 <!--添加 S-->
-<div class="modal fade" id="myModal0" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal0_1" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-worppar">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="h5Class">添加项目信息</h2>
+                <h2 class="h5Class">添加一级项目信息</h2>
                 <a type="button" class="btn btn-primary" data-dismiss="modal"
                    style="position:absolute; right: 31px; top: 10px;">关闭</a>
                 <div class="ibox-content">
-                    <form class="form-horizontal m-t" id="add" novalidate="novalidate">
+                    <form class="form-horizontal m-t" id="addFirst" novalidate="novalidate">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">项目名称：</label>
                             <div class="col-sm-10">
                                 <input name="taskProjectName" minlength="1" type="text" class="form-control" required
-                                       aria-required="true">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">检查主体：</label>
-                            <div class="col-sm-10">
-                                <input name="taskProjectCheckDepartment" minlength="1" type="text" class="form-control" required
                                        aria-required="true">
                             </div>
                         </div>
@@ -154,9 +139,72 @@
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2 pb20">
                                 <a class="btn btn-primary add-action">保存</a>
+                                <input type="reset" name="reset" hidden/>
                             </div>
                         </div>
-                        <input type="reset" name="reset" hidden/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal0_2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-worppar">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h5Class">添加二级清单信息</h2>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"
+                   style="position:absolute; right: 31px; top: 10px;">关闭</a>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="addSecond" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">任务名称：</label>
+                            <div class="col-sm-10">
+                                <input name="taskName" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">一级项目：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b taskProjects" name="taskProject">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">检查主体：</label>
+                            <div class="col-sm-10">
+                                <input name="taskCheckDepartment" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">任务内容：</label>
+                            <div class="col-sm-10">
+                                <input name="taskContent" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">法律条文：</label>
+                            <div class="col-sm-10">
+                                <input name="lawContent" minlength="1" type="text" class="form-control" required
+                                       aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">说明：</label>
+                            <div class="col-sm-10">
+                                <textarea name="description" class="form-control" required
+                                          aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2 pb20">
+                                <a class="btn btn-primary add-two-action">保存</a>
+                            </div>
+                            <input type="reset" name="reset" hidden/>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -164,7 +212,7 @@
     </div>
 </div>
 <!--添加 E-->
-<div class="modal fade" id="myModal2" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal1" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-worppar">
         <div class="row">
             <div class="col-md-12">
@@ -180,6 +228,7 @@
                             <th>检查主体</th>
                             <th>检查内容</th>
                             <th>检查依据</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody id="tContentChild">

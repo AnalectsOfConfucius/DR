@@ -56,7 +56,6 @@ function initPage(page, size) {
                     '<td></td>',
                     '<td>',
                     '<a href="javascript:;" onclick="detailOne(${it.id})">详情</a>',
-                    '<a href="javascript:;" onclick="deleteOne(${it.id})">删除</a>',
                     '</td>',
                     '</tr>',
                     '{@/each}'].join('');
@@ -117,4 +116,37 @@ function detailOne(id) {
         },
     });
     $('#myModal2').modal("toggle");
+};
+
+function deleteOne(id) {
+    swal({
+            title: "您确定要删除这条信息吗",
+            text: "删除后将无法恢复，请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "是的，我要删除！",
+            cancelButtonText: "让我再考虑一下…",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: window.apiPoint + 'double-randoms/' + id,
+                    type: 'DELETE',
+                    async: true,
+                    dataType: 'json',
+                    complete: function (data) {
+                        console.log(data);
+                        if (data.status == 200 && data.statusText == "OK") {
+                            swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                            initPage(0, 10);
+                        }
+                    },
+                });
+            } else {
+                swal("已取消", "您取消了删除操作！", "error");
+            }
+        });
 };

@@ -28,28 +28,23 @@ $(function () {
             }
         },
     });
-    initQuery(0, 10);
     $('.search-action').click(function () {
         initQuery(0, 10);
     });
 });
 
 function initQuery(page, size) {
-    var doubleRandomManagerName = $('#third').find('input[name=doubleRandomManagerName]').val();
-    var doubleRandomManagerNumber = $('#third').find('select[name=doubleRandomManagerNumber]').val();
-    var doubleRandomManagerDepartment = $('#third').find('select[name=doubleRandomManagerDepartment]').find("option:selected").text();
+    // var doubleRandomManagerName = $('#third').find('input[name=doubleRandomManagerName]').val();
+    // var doubleRandomManagerNumber = $('#third').find('select[name=doubleRandomManagerNumber]').val();
+    var doubleRandomManagerDepartment = $('#third').find('select[name=doubleRandomManagerDepartment]').val();
     var doubleRandomManagerRatio = $('#third').find('input[name=doubleRandomManagerRatio]').val();
-    var query = doubleRandomManagerDepartment;
-    /*if (query == "" || query == null) {
-        return;
-    }*/
     var dataQuery = {
         page: page,
         size: size,
-        query: query,
+        lawenforceDepartmentId: doubleRandomManagerDepartment,
     };
     $.ajax({
-        url: window.apiPoint + '_search/managers',
+        url: window.apiPoint + 'managers/search',
         type: 'GET',
         // GET请求传递data
         data: dataQuery,
@@ -82,6 +77,11 @@ function initQuery(page, size) {
                     'current_page': dataQuery.page,
                     'callback': pageQuery,
                 });
+            } else {
+                $('.third-action').hide();
+                var html = '';
+                $('#tContent').html(html);
+                $("#Pagination").pagination(0);
             }
         },
     });

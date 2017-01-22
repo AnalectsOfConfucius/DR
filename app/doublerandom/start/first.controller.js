@@ -1,24 +1,22 @@
 $(function () {
-    $('.chosen-select').chosen({});
-    /*$.ajax({
+    $.ajax({
         url: window.apiPoint + 'tasks',
         type: 'GET',
         async: true,
         dataType: 'json',
         success: function (data) {
             if (data) {
-                console.log(data);
-                data["tasks"] = {}
+                var result = {};
+                result["tasks"] = data;
                 var tpl = [
                     '<option value=""></option>',
-                    '{@each doubleRandomResults as it,index}',
-                    '<optgroup label="商标检查">',
-                    '<option>商标违规</option>',
-                    '</optgroup>',
+                    '{@each tasks as it,index}',
+                    '<option value="${it.id}">${it.taskName}</option>',
                     '{@/each}'].join('');
-                var html = juicer(tpl, data);
+                var html = juicer(tpl, result);
                 $('#tContent').html(html);
+                $('.chosen-select').chosen({});
             }
         },
-    });*/
+    });
 });

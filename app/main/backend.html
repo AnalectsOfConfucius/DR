@@ -4,17 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;/app/unsupport/ie.html"/>
     <![endif]-->
     <title>主页</title>
     <link rel="shortcut icon" href="/favicon.ico">
-    <link href="/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/animate.css" rel="stylesheet">
-    <link href="/assets/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <style>
         #header {
@@ -38,7 +36,6 @@
     </style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg fixed-nav" style="overflow:hidden">
-
 <div id="wrapper">
     <!--左侧导航开始-->
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -75,10 +72,7 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="/app/company/normalList.html">正常企业库</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/app/company/abnormalList.html">异常企业库</a>
+                            <a class="J_menuItem" href="/app/company/list.html">企业信息库</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="/app/manager/list.html">执法人员库</a>
@@ -108,34 +102,12 @@
                             class="nav-label">任务清单</span></a>
                 </li>
                 <li>
-                    <a href="javascript:;">
-                        <i class="fa fa fa-tag"></i>
-                        <span class="nav-label">法律法规</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="/app/law/list.html">法律法规库</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/app/doublerandom/history.html">相关文件</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/app/doublerandom/history.html">相关资料</a>
-                        </li>
-                    </ul>
+                    <a class="J_menuItem" href="/app/law/list.html"><i class="fa fa-book"></i> <span
+                            class="nav-label">法律法规</span></a>
                 </li>
                 <li>
-                    <a href="javascript:;">
-                        <i class="fa fa fa-gear"></i>
-                        <span class="nav-label">系统管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="/app/system/warningSignConfig.html">红黄牌配置</a>
-                        </li>
-                    </ul>
+                    <a class="J_menuItem" href="/app/system/warningSignConfig.html"><i class="fa fa-gear"></i> <span
+                            class="nav-label">红黄牌配置</span></a>
                 </li>
                 <li>
                     <a href="javascript:;">
@@ -211,23 +183,15 @@
     </div>
     <!--右侧部分结束-->
 </div>
-
-<!-- 全局js -->
-<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
-<script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/js/plugins/layer/layer.min.js"></script>
-
-<!-- 自定义js -->
 <script src="/assets/js/hplus.js?v=4.1.0"></script>
-<script type="text/javascript" src="/assets/js/contabs.js"></script>
-
-<!-- 第三方插件 -->
+<script src="/assets/js/contabs.js"></script>
 <script src="/assets/js/plugins/pace/pace.min.js"></script>
 <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
-
-<!-- service -->
 <script src="/app/service/global.service.js"></script>
 <script src="/app/service/ajax.service.js"></script>
 <script src="/app/service/auth.service.js"></script>

@@ -3,25 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link href="/assets/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="/assets/css/animate.min.css" rel="stylesheet">
-    <link href="/assets/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="/assets/css/style.min.css" rel="stylesheet">
     <link href="/assets/css/pagination.css" rel="stylesheet">
-    <!-- Sweet Alert -->
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <!-- 引用控制层插件样式 -->
-    <link rel="stylesheet" href="/assets/css/zyUpload.css" type="text/css">
+    <link href="/assets/css/zyUpload.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <style>
-        /*table {
-            word-break: keep-all;
-            white-space: nowrap;
-        }*/
-
         .wilq a {
             font-size: 15px;
             padding-right: 5px;
@@ -131,32 +122,32 @@
                 <a type="button" class="btn btn-primary" data-dismiss="modal"
                    style="position:absolute; right: 31px; top: 10px;">关闭</a>
                 <div class="ibox-content">
-                    <form class="form-horizontal m-t" novalidate="novalidate">
+                    <form class="form-horizontal m-t" id="add" novalidate="novalidate">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">企业名称：</label>
                             <div class="col-sm-10">
-                                <input name="name" minlength="1" type="text" class="form-control" required
+                                <input name="companyName" minlength="1" type="text" class="form-control" required
                                        aria-required="true" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">注册号：</label>
                             <div class="col-sm-10">
-                                <input name="name" minlength="1" type="text" class="form-control" required
+                                <input name="companyRegisterId" minlength="1" type="text" class="form-control" required
                                        aria-required="true" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">注册地址：</label>
                             <div class="col-sm-10">
-                                <input name="name" minlength="1" type="text" class="form-control" required
+                                <input name="companyAddress" minlength="1" type="text" class="form-control" required
                                        aria-required="true" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">经营地址：</label>
                             <div class="col-sm-10">
-                                <input name="name" minlength="1" type="text" class="form-control" required
+                                <input name="businessAddress" minlength="1" type="text" class="form-control" required
                                        aria-required="true" disabled>
                             </div>
                         </div>
@@ -203,14 +194,14 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">法人代表：</label>
                             <div class="col-sm-10">
-                                <input name="name" minlength="1" type="text" class="form-control" required
+                                <input name="companyOwner" minlength="1" type="text" class="form-control" required
                                        aria-required="true" disabled>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">联系电话：</label>
                             <div class="col-sm-10">
-                                <input name="name" minlength="1" type="text" class="form-control" required
+                                <input name="companyPhone" minlength="1" type="text" class="form-control" required
                                        aria-required="true" disabled>
                             </div>
                         </div>
@@ -229,14 +220,14 @@
                             <div class="col-sm-10">
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" class="form-control" disabled>
+                                    <input type="text" name="companyDate" class="form-control" disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">备注信息：</label>
                             <div class="col-sm-10">
-                                <textarea id="comment" name="comment" class="form-control" required
+                                <textarea name="description" class="form-control" required
                                           aria-required="true" disabled></textarea>
                             </div>
                         </div>
@@ -248,13 +239,12 @@
     </div>
 </div>
 <!--查看 E-->
-<script src="/assets/js/jquery.min.js?v=2.1.4"></script>
-<script src="/assets/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/juicer-min.js"></script>
-<script src="/assets/js/content.min.js?v=1.0.0"></script>
+<script src="/assets/js/content.min.js"></script>
 <script src="/assets/js/jquery.pagination.js"></script>
 <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
-<!-- Data picker -->
 <script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <script src="/app/service/global.service.js"></script>
 <script src="/app/service/ajax.service.js"></script>

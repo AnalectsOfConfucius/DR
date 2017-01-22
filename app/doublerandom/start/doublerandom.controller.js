@@ -3,6 +3,9 @@ $('.first-action').click(function () {
     var doubleRandomNotary = $('#first').find('input[name=doubleRandomNotary]').val();
     var doubleRandomDate = $('#first').find('input[name=doubleRandomDate]').val();
     var tasks = $('#first').find('select[name=tasks]').val();
+    if (tasks.length < 1 || doubleRandomDate.length < 1) {
+        return;
+    }
     localStorage.setItem("doubleRandomName", doubleRandomName);
     localStorage.setItem("doubleRandomNotary", doubleRandomNotary);
     localStorage.setItem("doubleRandomDate", doubleRandomDate);
@@ -17,6 +20,9 @@ $('.second-action').click(function () {
     var doubleRandomCompanySupervisory = $('#second').find('select[name=doubleRandomCompanySupervisory]').val();
     var doubleRandomCompanyIndustryType = $('#second').find('select[name=doubleRandomCompanyIndustryType]').val();
     var doubleRandomCompanyRatio = $('#second').find('input[name=doubleRandomCompanyRatio]').val();
+    if (doubleRandomCompanyRatio < 1) {
+        return;
+    }
     localStorage.setItem("doubleRandomCompanyName", doubleRandomCompanyName);
     localStorage.setItem("doubleRandomCompanyArea", doubleRandomCompanyArea);
     localStorage.setItem("doubleRandomCompanyType", doubleRandomCompanyType);
@@ -31,6 +37,9 @@ $('.third-action').click(function () {
     var doubleRandomManagerNumber = $('#third').find('select[name=doubleRandomManagerNumber]').val();
     var doubleRandomManagerDepartment = $('#third').find('select[name=doubleRandomManagerDepartment]').val();
     var doubleRandomManagerRatio = $('#third').find('input[name=doubleRandomManagerRatio]').val();
+    if (doubleRandomManagerRatio < 1) {
+        return;
+    }
     localStorage.setItem("doubleRandomManagerName", doubleRandomManagerName);
     localStorage.setItem("doubleRandomManagerNumber", doubleRandomManagerNumber);
     localStorage.setItem("doubleRandomManagerDepartment", doubleRandomManagerDepartment);

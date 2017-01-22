@@ -23,26 +23,6 @@ $(function () {
                     '{@each lawenforceDepartments as it,index}',
                     '<option value="${it.id}">${it.departmentName}</option>',
                     '{@/each}'].join('');
-                var html = juicer(tpl, data);
-                $('#tContent1').html(html);
-            }
-        },
-    });
-    $.ajax({
-        url: window.apiPoint + 'lawenforce-departments',
-        type: 'GET',
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                console.log(data);
-                var result = {};
-                result["lawenforceDepartments"] = data;
-                var tpl = [
-                    '<option value=""></option>',
-                    '{@each lawenforceDepartments as it,index}',
-                    '<option value="${it.id}">${it.departmentName}</option>',
-                    '{@/each}'].join('');
                 var html = juicer(tpl, result);
                 $('#lawenforceDepartments').html(html);
             }
@@ -88,7 +68,6 @@ $(function () {
             }
         },
     });
-    initQuery(0, 10);
     $('.search-action').click(function () {
         initQuery(0, 10);
     });
@@ -96,22 +75,21 @@ $(function () {
 
 function initQuery(page, size) {
     var doubleRandomCompanyName = $('#second').find('input[name=doubleRandomCompanyName]').val();
-    var doubleRandomCompanyType = $('#second').find('select[name=doubleRandomCompanyType]').find("option:selected").text();
-    var doubleRandomCompanySupervisory = $('#second').find('select[name=doubleRandomCompanySupervisory]').find("option:selected").text();
-    var doubleRandomCompanyIndustryType = $('#second').find('select[name=doubleRandomCompanyIndustryType]').find("option:selected").text();
+    var doubleRandomCompanyType = $('#second').find('select[name=doubleRandomCompanyType]').val();
+    // var doubleRandomCompanyType = $('#second').find('select[name=doubleRandomCompanyType]').find("option:selected").text();
+    var doubleRandomCompanySupervisory = $('#second').find('select[name=doubleRandomCompanySupervisory]').val();
+    var doubleRandomCompanyIndustryType = $('#second').find('select[name=doubleRandomCompanyIndustryType]').val();
     var doubleRandomCompanyRatio = $('#second').find('input[name=doubleRandomCompanyRatio]').val();
-    var query = doubleRandomCompanyName + doubleRandomCompanyType + doubleRandomCompanySupervisory + doubleRandomCompanyIndustryType;
-    /*if (query == "" || query == null) {
-        return;
-    }*/
-    console.log(query);
     var dataQuery = {
         page: page,
         size: size,
-        query: query,
+        companyName: doubleRandomCompanyName,
+        companyTypeId: doubleRandomCompanyType,
+        companySupervisoryId: doubleRandomCompanySupervisory,
+        industryTypeId: doubleRandomCompanyIndustryType,
     };
     $.ajax({
-        url: window.apiPoint + '_search/companies',
+        url: window.apiPoint + 'companies/search',
         type: 'GET',
         // GET请求传递data
         data: dataQuery,
@@ -143,6 +121,11 @@ function initQuery(page, size) {
                     'current_page': dataQuery.page,
                     'callback': pageQuery,
                 });
+            } else {
+                $('.second-action').hide();
+                var html = '';
+                $('#tContent').html(html);
+                $("#Pagination").pagination(0);
             }
         },
     });

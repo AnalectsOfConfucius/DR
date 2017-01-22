@@ -93,7 +93,8 @@
         var doubleRandomManagerRatio = localStorage.getItem("doubleRandomManagerRatio");
         var description = companyDescription + "||" + managerDescription;
         console.log(doubleRandomManagerDepartment);
-        tasks = tasks.replace(/,/, "|");
+        tasks = tasks.toString().replace(/,/g,"|")
+        console.log(tasks);
         var dataPost = {
             doubleRandomName: doubleRandomName,
             doubleRandomNotary: doubleRandomNotary,
@@ -126,6 +127,20 @@
                 }
             },
         });
+        localStorage.removeItem("doubleRandomName");
+        localStorage.removeItem("doubleRandomNotary");
+        localStorage.removeItem("doubleRandomDate");
+        localStorage.removeItem("tasks");
+        localStorage.removeItem("doubleRandomCompanyName");
+        localStorage.removeItem("companyDescription");
+        localStorage.removeItem("doubleRandomCompanyType");
+        localStorage.removeItem("doubleRandomCompanySupervisory");
+        localStorage.removeItem("doubleRandomCompanyIndustryType");
+        localStorage.removeItem("doubleRandomCompanyRatio");
+        localStorage.removeItem("doubleRandomManagerName");
+        localStorage.removeItem("managerDescription");
+        localStorage.removeItem("doubleRandomManagerDepartment");
+        localStorage.removeItem("doubleRandomManagerRatio");
     })
     $('.finish-action').click(function () {
         var doubleRandomId = $('#doubleRandomId').val();

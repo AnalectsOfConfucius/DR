@@ -10,8 +10,14 @@ $(function () {
     $('.search-action').click(function () {
         initQuery(0, 10);
     });
-    $('.add-action').click(function () {
-        add();
+    $('.add-two-modal').bind('click', function () {
+        initAddTwo();
+    });
+    $('.add-two-action').bind('click', function () {
+        addTwo();
+    });
+    $('.add-action').bind('click', function () {
+        addOne();
     });
     $('.delete-action').click(function () {
         swal({
@@ -35,60 +41,27 @@ $(function () {
     });
 });
 
-function add() {
-    var addUrl = window.apiPoint + 'task-projects';
-    var taskProjectName = $("#add").find("input[name=taskProjectName]").val();
-    var taskProjectCheckDepartment = $("#add").find("input[name=taskProjectCheckDepartment]").val();
-    var description = $("#add").find("textarea[name=description]").val();
-    var dataPost = {
-        taskProjectName: taskProjectName,
-        taskProjectCheckDepartment: taskProjectCheckDepartment,
-        description: description
-    };
-    console.log(dataPost);
+function initAddTwo() {
     $.ajax({
-        url: addUrl,
-        type: 'POST',
-        // 序列化Json对象为Json字符串
-        data: JSON.stringify(dataPost),
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                initPage(0, 10);
-                $('#myModal0').modal('hide');
-                $('input[name=reset]').trigger("click");
-            }
-        },
-    });
-};
-
-function detailOne(id) {
-    $.ajax({
-        url: window.apiPoint + 'task/taskProject?taskProjectId=' + id,
+        url: window.apiPoint + 'task-projects',
         type: 'GET',
         async: true,
         dataType: 'json',
         success: function (data) {
             if (data) {
+                console.log(data);
                 var result = {};
-                result['tasks'] = data;
+                result["taskProjects"] = data;
                 var tpl = [
-                    '{@each tasks as it,index}',
-                    '<tr>',
-                    '<td>${it.id}</td>',
-                    '<td>${it.taskName}</td>',
-                    '<td>${it.taskCheckDepartment}</td>',
-                    '<td>${it.taskContent}</td>',
-                    '<td>{@if it.lawContent != null }${it.lawContent}{@/if}</td>',
-                    '</tr>',
+                    '<option value=""></option>',
+                    '{@each taskProjects as it,index}',
+                    '<option value="${it.id}">${it.taskProjectName}</option>',
                     '{@/each}'].join('');
                 var html = juicer(tpl, result);
-                $('#tContentChild').html(html);
+                $('.taskProjects').html(html);
             }
         },
     });
-    $('#myModal2').modal("toggle");
 };
 
 function initQuery(page, size) {
@@ -221,4 +194,127 @@ function deleteOne(id) {
                 swal("已取消", "您取消了删除操作！", "error");
             }
         });
+};
+
+function deleteTwo(id) {
+    swal({
+            title: "您确定要删除这条信息吗",
+            text: "删除后将无法恢复，请谨慎操作！",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "是的，我要删除！",
+            cancelButtonText: "让我再考虑一下…",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: window.apiPoint + 'tasks/' + id,
+                    type: 'DELETE',
+                    async: true,
+                    dataType: 'json',
+                    complete: function (data) {
+                        console.log(data);
+                        if (data.status == 200 && data.statusText == "OK") {
+                            $('#myModal1').modal("toggle");
+                            swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                        }
+                    },
+                });
+            } else {
+                swal("已取消", "您取消了删除操作！", "error");
+            }
+        });
+};
+
+function addOne() {
+    var taskProjectName = $("#addFirst").find("input[name=taskProjectName]").val();
+    var description = $("#addFirst").find("textarea[name=description]").val();
+    var dataPost = {
+        taskProjectName: taskProjectName,
+        description: description
+    };
+    console.log(dataPost);
+    $.ajax({
+        url: window.apiPoint + 'task-projects',
+        type: 'POST',
+        // 序列化Json对象为Json字符串
+        data: JSON.stringify(dataPost),
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                initPage(0, 10);
+                $('#myModal0_1').modal('hide');
+                $('input[name=reset]').trigger("click");
+            }
+        },
+    });
+};
+
+function addTwo() {
+    var taskName = $("#addSecond").find("input[name=taskName]").val();
+    var taskContent = $("#addSecond").find("input[name=taskContent]").val();
+    var lawContent = $("#addSecond").find("input[name=lawContent]").val();
+    var taskCheckDepartment = $("#addSecond").find("input[name=taskCheckDepartment]").val();
+    var taskProjectId = $("#addSecond").find("select[name=taskProject]").val();
+    var description = $("#addSecond").find("textarea[name=description]").val();
+    var taskProject = {id: taskProjectId};
+    var dataPost = {
+        taskName: taskName,
+        taskContent: taskContent,
+        lawContent: lawContent,
+        taskCheckDepartment: taskCheckDepartment,
+        taskProject: taskProject,
+        description: description
+    };
+    console.log(dataPost);
+    $.ajax({
+        url: window.apiPoint + 'tasks',
+        type: 'POST',
+        // 序列化Json对象为Json字符串
+        data: JSON.stringify(dataPost),
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                initPage(0, 10);
+                $('#myModal0_2').modal('hide');
+                $('input[name=reset]').trigger("click");
+            }
+        },
+    });
+};
+
+function detailOne(id) {
+    $.ajax({
+        url: window.apiPoint + 'task/taskProject?taskProjectId=' + id,
+        type: 'GET',
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                var result = {};
+                result['tasks'] = data;
+                var tpl = [
+                    '{@each tasks as it,index}',
+                    '<tr>',
+                    '<td>${it.id}</td>',
+                    '<td>${it.taskName}</td>',
+                    '<td>${it.taskCheckDepartment}</td>',
+                    '<td>${it.taskContent}</td>',
+                    '<td>{@if it.lawContent != null }${it.lawContent}{@/if}</td>',
+                    '<td>',
+                    '<a href="javascript:;" onclick="deleteTwo(${it.id})">删除</a>',
+                    '</td>',
+                    '</tr>',
+                    '{@/each}'].join('');
+                var html = juicer(tpl, result);
+                $('#tContentChild').html(html);
+            }
+        },
+    });
+    $('#myModal1').modal("toggle");
 };

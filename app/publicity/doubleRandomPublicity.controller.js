@@ -1,11 +1,11 @@
 $(function () {
     //退出全屏
-    var url = window.apiPoint + 'double-random-results/doubleRandom';
+    var url = window.apiPoint + 'double-random-results';
     console.log(url);
     var dataQuery = {
         page: 0,
-        size: 1000,
-        doubleRandomId: 1
+        size: 100,
+        sort: 'id,desc'
     };
     $.ajax({
         url: url,
@@ -28,9 +28,9 @@ $(function () {
                     '<td>{@if it.doubleRandom.doubleRandomTaskContent != null }${it.doubleRandom.doubleRandomTaskContent}{@/if}</td>',
                     '<td>${it.people}</td>',
                     '<td>${it.doubleRandom.doubleRandomDate}</td>',
-                    '<td>{@if it.result != null }${it.result}{@/if}责令查改</td>',
-                    '<td>{@if it.resultDeal != null }${it.result}{@/if}已整改</td>',
-                    '<td>{@if it.resultStatus != null }${it.result}{@/if}正常</td>',
+                    '<td>{@if it.result != null }${it.result}{@else}正常{@/if}</td>',
+                    '<td>{@if it.resultDeal != null }{@else if it.resultDeal == 2}责令查改{@else}{@/if}</td>',
+                    '<td>{@if it.resultStatus != null }${it.resultStatus}{@else}正常{@/if}</td>',
                     '</tr>',
                     '{@/each}'].join('');
                 var html = juicer(tpl, result);
