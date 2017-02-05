@@ -7,7 +7,7 @@
     <link href="/assets/css/font-awesome.css" rel="stylesheet">
     <link href="/assets/css/animate.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/plugins/chosen/chosen.min.css" rel="stylesheet">
+    <link href="/assets/css/plugins/chosen/chosen.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 <div class="row wrapper border-bottom white-bg page-heading animated fadeInRight">
@@ -24,32 +24,29 @@
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h4>创立抽选方案</h4>
+                    <h5>创立抽选方案</h5>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal m-t" id="first" novalidate="novalidate">
+                    <form class="form-horizontal m-t" id="first">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">公证人：</label>
-                            <div class="col-sm-6">
-                                <input minlength="2" type="text" name="doubleRandomNotary"
-                                       class="form-control" required
-                                       aria-required="true">
+                            <div class="col-sm-8">
+                                <input id="firstname" name="doubleRandomNotary" class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">检查日期：</label>
-                            <div class="col-sm-6">
-                                <input class="form-control layer-date" name="doubleRandomDate" placeholder="YYYY-MM-DD" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
-                                <label class="laydate-icon"></label>
+                            <div class="col-sm-8">
+                                <input class="form-control layer-date" style="max-width: 100%;" name="doubleRandomDate" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">任务清单：</label>
-                            <div class="col-sm-6">
-                                <select name="tasks" data-placeholder="请选择检查项目" style="width:450px;" class="chosen-select" multiple
+                            <div class="col-sm-8">
+                                <select name="tasks" data-placeholder="请选择检查项目" style="width: 100%;" class="chosen-select" multiple
                                         tabindex="6" id="tContent">
                                 </select>
                             </div>
@@ -67,7 +64,6 @@
 <script src="/assets/js/plugins/validate/messages_zh.min.js"></script>
 <script src="/assets/js/demo/form-validate-demo.js"></script>
 <script src="/assets/js/plugins/chosen/chosen.jquery.min.js"></script>
-<script src="/assets/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <script src="/assets/js/plugins/layer/laydate/laydate.js"></script>
 <script src="/assets/js/juicer-min.js"></script>
 <script src="/app/service/global.service.js"></script>
