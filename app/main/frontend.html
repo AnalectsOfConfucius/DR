@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- <base href="https://analectsofconfucius.github.io/HistoryAsAMirror" /> -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>主页</title>
-    <meta name="keywords" content="主页">
-    <meta name="description" content="主页">
     <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;/app/support/ie.html" />
+    <meta http-equiv="refresh" content="0;/app/support/ie.html"/>
     <![endif]-->
+    <title>主页</title>
     <link rel="shortcut icon" href="/favicon.ico">
-    <link href="/assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/assets/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/animate.css" rel="stylesheet">
-    <link href="/assets/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <style>
         #header {
@@ -39,124 +36,126 @@
     </style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg fixed-nav" style="overflow:hidden">
-    <div id="wrapper">
-        <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="nav-close"><i class="fa fa-times-circle"></i>
-            </div>
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="/assets/img/profile_small.jpg" /></span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span><img alt="image" class="img-circle" src="/assets/img/profile_small.jpg"/></span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">YYH</strong></span>
                                 <span class="text-muted text-xs block">执法人员<b class="caret"></b></span>
                                 </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="javascript:void(0);" class="logout-action">安全退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">YYH
-                        </div>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="/app/home/fronthome.html"><i class="fa fa-home"></i> <span class="nav-label">主页</span></a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="/app/center/profile.html"><i class="fa fa-user"></i> <span class="nav-label">个人资料</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">双随机任务</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">我的任务 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a class="J_menuItem" href="/app/task/taskboxList.html">未完成</a>
-                                    </li>
-                                    <li><a class="J_menuItem" href="/app/task/taskboxModifyList.html">责令整改</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="J_menuItem" href="/app/task/finishedList.html">已完成任务记录</a>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="javascript:void(0);" class="logout-action">安全退出</a>
                             </li>
                         </ul>
+                    </div>
+                    <div class="logo-element">YYH
+                    </div>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="/app/home/fronthome.html"><i class="fa fa-home"></i> <span
+                            class="nav-label">主页</span></a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="/app/center/profile.html"><i class="fa fa-user"></i> <span
+                            class="nav-label">个人资料</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">双随机任务</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">我的任务 <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a class="J_menuItem" href="/app/task/taskboxList.html">未完成</a>
+                                </li>
+                                <li><a class="J_menuItem" href="/app/task/taskboxModifyList.html">责令整改</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="J_menuItem" href="/app/task/finishedList.html">已完成任务记录</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                <div id="header">
+                    <div class="h-r"></div>
+                </div>
+            </nav>
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active J_menuTab" data-id="/app/home/fronthome.html">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                </button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                    </li>
+                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
                     </li>
                 </ul>
             </div>
-        </nav>
-        <!--左侧导航结束-->
-        <!--右侧部分开始-->
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-                    <div id="header">
-                        <div class="h-r"></div>
-                    </div>
-                </nav>
-            </div>
-            <div class="row content-tabs">
-                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
-                </button>
-                <nav class="page-tabs J_menuTabs">
-                    <div class="page-tabs-content">
-                        <a href="javascript:;" class="active J_menuTab" data-id="/app/home/fronthome.html">首页</a>
-                    </div>
-                </nav>
-                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
-                </button>
-                <div class="btn-group roll-nav roll-right">
-                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
-
-                    </button>
-                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
-                        </li>
-                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
-                        </li>
-                    </ul>
-                </div>
-                <a href="javascript:void(0)" class="roll-nav roll-right J_tabExit logout-action"><i class="fa fa fa-sign-out"></i> 退出</a>
-            </div>
-            <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/app/home/fronthome.html" frameborder="0" data-id="/app/home/fronthome.html" seamless></iframe>
-            </div>
-            <div class="footer">
-                <div class="pull-right">&copy; 2016 <a href="http://www.hnyuyuhui.com" target="_blank">煜煜辉科技</a>
-                </div>
+            <a href="javascript:void(0)" class="roll-nav roll-right J_tabExit logout-action"><i
+                    class="fa fa fa-sign-out"></i> 退出</a>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/app/home/fronthome.html"
+                    frameborder="0" data-id="/app/home/fronthome.html" seamless></iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right">&copy; 2016 <a href="http://www.hnyuyuhui.com" target="_blank">煜煜辉科技</a>
             </div>
         </div>
-        <!--右侧部分结束-->
     </div>
+    <!--右侧部分结束-->
+</div>
 
-    <!-- 全局js -->
-    <script src="/assets/js/jquery.min.js?v=2.1.4"></script>
-    <script src="/assets/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/assets/js/plugins/layer/layer.min.js"></script>
+<!-- 全局js -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 
-    <!-- 自定义js -->
-    <script src="/assets/js/hplus.js?v=4.1.0"></script>
-    <script type="text/javascript" src="/assets/js/contabs.js"></script>
+<!-- 自定义js -->
+<script src="/assets/js/hplus.js"></script>
+<script src="/assets/js/contabs.js"></script>
 
-    <!-- 第三方插件 -->
-    <script src="/assets/js/plugins/pace/pace.min.js"></script>
-    <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
-    <script type="text/javascript">
+<!-- 第三方插件 -->
+<script src="/assets/js/plugins/pace/pace.min.js"></script>
+<script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/assets/js/plugins/layer/layer.min.js"></script>
 
-    </script>
+<!-- service -->
+<script src="/app/service/global.service.js"></script>
+<script src="/app/service/ajax.service.js"></script>
+<script src="/app/service/warn.service.js"></script>
 
-    <!-- service -->
-    <script src="/app/service/global.service.js"></script>
-    <script src="/app/service/ajax.service.js"></script>
-    <script src="/app/service/warn.service.js"></script>
-    <script src="/app/service/auth.service.js"></script>
 </body>
 </html>
