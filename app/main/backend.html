@@ -77,6 +77,24 @@
                 </li>
                 <li>
                     <a href="javascript:;">
+                        <i class="fa fa fa-gears"></i>
+                        <span class="nav-label">系统管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="/app/system/user.html">用户管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="/app/system/warningSignConfig.html">红黄牌配置</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="/app/task/projectList.html">任务清单</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
                         <i class="fa fa fa-table"></i>
                         <span class="nav-label">资料录入</span>
                         <span class="fa arrow"></span>
@@ -87,6 +105,9 @@
                         </li>
                         <li>
                             <a class="J_menuItem" href="/app/manager/list.html">执法人员库</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="/app/law/list.html">法律法规库</a>
                         </li>
                     </ul>
                 </li>
@@ -107,18 +128,6 @@
                             <a class="J_menuItem" href="/app/doublerandom/history.html">双随机历史记录</a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="/app/task/projectList.html"><i class="fa fa-tasks"></i> <span
-                            class="nav-label">任务清单</span></a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="/app/law/list.html"><i class="fa fa-book"></i> <span
-                            class="nav-label">法律法规</span></a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="/app/system/warningSignConfig.html"><i class="fa fa-gear"></i> <span
-                            class="nav-label">红黄牌配置</span></a>
                 </li>
                 <li>
                     <a href="javascript:;">
@@ -194,17 +203,25 @@
     </div>
     <!--右侧部分结束-->
 </div>
+
+<!-- 全局js -->
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- 自定义js -->
+<script src="/assets/js/hplus.js"></script>
+<script src="/assets/js/contabs.js"></script>
+
+<!-- 第三方插件 -->
 <script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/js/plugins/layer/layer.min.js"></script>
-<script src="/assets/js/hplus.js?v=4.1.0"></script>
-<script src="/assets/js/contabs.js"></script>
 <script src="/assets/js/plugins/pace/pace.min.js"></script>
 <script src="/assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- service -->
 <script src="/app/service/global.service.js"></script>
-<script src="/app/service/ajax.service.js"></script>
 <script src="/app/service/auth.service.js"></script>
+
 </body>
 </html>
