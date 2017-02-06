@@ -1,0 +1,10 @@
+Serving "/home/yuyuhui/YYH/yyh/source/DR" at http://127.0.0.1:8081
+Ready for changes
+Change detected /home/yuyuhui/YYH/yyh/source/DR/nohup.out
+Serving "/home/yuyuhui/YYH/yyh/source/DR" at http://127.0.0.1:8081
+Ready for changes
+Change detected /home/yuyuhui/YYH/yyh/source/DR/nohup.out
+[0mGET /app/system/user.html [33m404 [0m2.524 ms - 33[0m
+Change detected /home/yuyuhui/YYH/yyh/source/DR/nohup.out
+[0mGET /app/system/user.html [33m404 [0m0.936 ms - 33[0m
+Change detected /home/yuyuhui/YYH/yyh/source/DR/nohup.out
